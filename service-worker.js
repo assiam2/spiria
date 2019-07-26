@@ -24,12 +24,7 @@ self.addEventListener('message', (event) => {
   }
 });
 
-workbox.core.clientsClaim();
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-}
+
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
