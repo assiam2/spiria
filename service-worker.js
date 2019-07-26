@@ -17,6 +17,7 @@ importScripts(
   "/precache-manifest.272634ca4db79e492f8a0461eb498811.js"
 );
 
+
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
@@ -24,7 +25,11 @@ self.addEventListener('message', (event) => {
 });
 
 workbox.core.clientsClaim();
-
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -37,3 +42,4 @@ workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/i
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
+
